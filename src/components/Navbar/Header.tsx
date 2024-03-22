@@ -7,7 +7,7 @@ function Header() {
   /**Saffron: #FF9933
 Green: #008000 */
   return (
-    <div className=" py-6 z-10">
+    <div className=" py-6 w-full z-10 absolute ">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           to="/"
