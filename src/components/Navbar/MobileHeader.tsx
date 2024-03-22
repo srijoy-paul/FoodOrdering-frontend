@@ -10,8 +10,10 @@ import {
 import { Menu } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function MobileHeader() {
+  const { loginWithRedirect } = useAuth0();
   return (
     <div>
       <Sheet>
@@ -32,7 +34,12 @@ function MobileHeader() {
             <SheetDescription>
               Savor the Flavors of Bengal, Delivered to Your Doorstep!
               <div className=" mt-2">
-                <Button className="w-full bg-bgreen">Login</Button>
+                <Button
+                  className="w-full bg-bgreen"
+                  onClick={async () => loginWithRedirect}
+                >
+                  Login
+                </Button>
               </div>
             </SheetDescription>
           </SheetHeader>

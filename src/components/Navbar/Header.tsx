@@ -2,10 +2,12 @@
 import { Link } from "react-router-dom";
 import MobileHeader from "./MobileHeader";
 import { Button } from "../ui/button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Header() {
   /**Saffron: #FF9933
 Green: #008000 */
+  const { loginWithRedirect } = useAuth0();
   return (
     <div className=" py-6 w-full z-10 absolute ">
       <div className="container mx-auto flex justify-between items-center">
@@ -29,6 +31,7 @@ Green: #008000 */
           <Button
             variant="ghost"
             className="font-bold text-white hover:text-saffron hover:bg-transparent"
+            onClick={async () => loginWithRedirect()}
           >
             Log In
           </Button>

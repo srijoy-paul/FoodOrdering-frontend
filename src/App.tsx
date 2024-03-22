@@ -1,15 +1,14 @@
-// import { useState } from "react";
-// import { Button } from "@/components/ui/button";
 import AppRoutes from "./AppRoutes";
-
-// import "./App.css";
+import Auth0ProviderWithNavigate from "./Auth/Auth0ProviderWithNavigate";
 
 function App() {
   // const [count, setCount] = useState(0);
 
   return (
     <>
-      <AppRoutes />
+      <Auth0ProviderWithNavigate>
+        <AppRoutes />
+      </Auth0ProviderWithNavigate>
     </>
   );
 }
