@@ -35,8 +35,8 @@ function MobileHeader() {
               Savor the Flavors of Bengal, Delivered to Your Doorstep!
               <div className=" mt-2">
                 <Button
-                  className="w-full bg-bgreen"
-                  onClick={async () => loginWithRedirect}
+                  className="w-full bg-bgreen hover:bg-saffron"
+                  onClick={async () => loginWithRedirect()}
                 >
                   Login
                 </Button>

@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import MobileHeader from "./MobileHeader";
 import { Button } from "../ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
+import DropDownMenu from "./DropDown";
 
 function Header() {
   /**Saffron: #FF9933
 Green: #008000 */
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   return (
     <div className=" py-6 w-full z-10 absolute ">
       <div className="container mx-auto flex justify-between items-center">
@@ -24,9 +25,32 @@ Green: #008000 */
             BengalBiteExpress
           </span>
         </Link>
-        <div className="justify-center items-center align-middle md:hidden">
-          <MobileHeader />
-        </div>
+
+        {isAuthenticated ? (
+          <div>
+            <DropDownMenu />
+          </div>
+        ) : (
+          <div className="hidden md:flex justify-center items-center align-middle">
+            <Button
+              variant="ghost"
+              className="font-bold text-white hover:text-saffron hover:bg-transparent"
+              onClick={async () => loginWithRedirect()}
+            >
+              Log In
+            </Button>
+          </div>
+        )}
+
+        {isAuthenticated ? (
+          ""
+        ) : (
+          <div className="justify-center items-center align-middle md:hidden">
+            <MobileHeader />
+          </div>
+        )}
+
+        {/*
         <div className="hidden md:flex justify-center items-center align-middle">
           <Button
             variant="ghost"
@@ -35,7 +59,12 @@ Green: #008000 */
           >
             Log In
           </Button>
-        </div>
+        </div> */}
+
+        {/* <div>
+          <DropDownMenu />
+          
+        </div> */}
       </div>
     </div>
   );
