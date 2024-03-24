@@ -9,7 +9,6 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import { CircleUserRound } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 
 export default function DropDownMenu() {

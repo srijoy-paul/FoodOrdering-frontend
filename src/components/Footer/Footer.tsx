@@ -8,7 +8,7 @@ function Footer() {
           BengalBiteExpress
         </span>
         <span className="text-white font-bold tracking-tighter flex gap-5">
-          <span>Priavacy Policy</span>
+          <span>Privacy Policy</span>
           <span>Terms and Conditions</span>
         </span>
       </div>
