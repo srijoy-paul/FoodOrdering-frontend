@@ -1,14 +1,23 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import AppRoutes from "./AppRoutes";
 import Auth0ProviderWithNavigate from "./Auth/Auth0ProviderWithNavigate";
 
-function App() {
-  // const [count, setCount] = useState(0);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
+function App() {
   return (
     <>
-      <Auth0ProviderWithNavigate>
-        <AppRoutes />
-      </Auth0ProviderWithNavigate>
+      <QueryClientProvider client={queryClient}>
+        <Auth0ProviderWithNavigate>
+          <AppRoutes />
+        </Auth0ProviderWithNavigate>
+      </QueryClientProvider>
     </>
   );
 }
