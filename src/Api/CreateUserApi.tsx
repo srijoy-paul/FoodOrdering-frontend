@@ -13,6 +13,7 @@ export const useCreateUser = () => {
   const createUserRequest = async (user: CreateUserRequest) => {
     const accessToken = await getAccessTokenSilently();
     console.log("token", accessToken);
+    console.log(`Bearer ${accessToken}`);
 
     const response = await fetch(`${API_BASE_URL}/api/v1/user/signup`, {
       method: "POST",
