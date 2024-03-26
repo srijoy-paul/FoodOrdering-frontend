@@ -9,7 +9,7 @@ import iosAppStore from "../../assets/getOnIosAppStore.png";
 
 function Home() {
   return (
-    <Layout>
+    <Layout isAbsolute={true}>
       <Hero />
 
       <div className="bg-white rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16 z-40 container mx-auto border-3 border-purple-400 relative">

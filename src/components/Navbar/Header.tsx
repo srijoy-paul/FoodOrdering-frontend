@@ -5,12 +5,12 @@ import { Button } from "../ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
 import DropDownMenu from "./DropDown";
 
-function Header() {
+function Header({ isAbsolute }) {
   /**Saffron: #FF9933
 Green: #008000 */
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   return (
-    <div className=" py-6 w-full z-10 absolute ">
+    <div className={` py-6 w-full z-10 ${isAbsolute ? "absolute" : ""} `}>
       <div className="container mx-auto flex justify-between items-center">
         <Link
           to="/"
