@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/custom_ui/LoadingButton";
+import { Zoom } from "react-awesome-reveal";
 
 const formSchema = z.object({
   email: z.string().optional(),
@@ -46,119 +47,121 @@ function UserProfileForm({ onSave, isLoading }: Props) {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSave)}
-        className=" text-saffron space-y-4 bg-gray-100 p-5 "
-      >
-        <div className="flex flex-col gap-6">
-          <div>
-            <h2 className="text-2xl font-bold">User Profile</h2>
-            <FormDescription className="">
-              View and Change your profile information
-            </FormDescription>
-          </div>
+      <Zoom>
+        <form
+          onSubmit={form.handleSubmit(onSave)}
+          className=" text-saffron space-y-4 bg-gray-100 p-5 "
+        >
+          <div className="flex flex-col gap-6">
+            <div>
+              <h2 className="text-2xl font-bold">User Profile</h2>
+              <FormDescription className="">
+                View and Change your profile information
+              </FormDescription>
+            </div>
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex">
-                  Email*
-                  <GiChiliPepper className="h-[15px] w-[15px]" />
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} disabled placeholder="dummy@gmol.tom" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex">
-                  Name*
-                  <Fish className="h-[15px]" />
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="bg-white border-0"
-                    placeholder="Priyonjoy Saiunghl"
-                    {...field}
-                    style={{ border: "none", outline: "none" }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className=" flex flex-col md:flex-row gap-5">
             <FormField
               control={form.control}
-              name="addressline1"
+              name="email"
               render={({ field }) => (
-                <FormItem className="flex-1">
+                <FormItem>
                   <FormLabel className="flex">
-                    Address Line 1*
-                    <GiCoolSpices className="h-[17px] w-[17px]" />
+                    Email*
+                    <GiChiliPepper className="h-[15px] w-[15px]" />
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} disabled placeholder="dummy@gmol.tom" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex">
+                    Name*
+                    <Fish className="h-[15px]" />
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-white"
-                      placeholder="16/A, 1st Cross, Shivaji Rd, Shivaji Nagar, 560051"
+                      className="bg-white border-0"
+                      placeholder="Priyonjoy Saiunghl"
                       {...field}
+                      style={{ border: "none", outline: "none" }}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+            <div className=" flex flex-col md:flex-row gap-5">
+              <FormField
+                control={form.control}
+                name="addressline1"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="flex">
+                      Address Line 1*
+                      <GiCoolSpices className="h-[17px] w-[17px]" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-white"
+                        placeholder="16/A, 1st Cross, Shivaji Rd, Shivaji Nagar, 560051"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel className="flex">
-                    City*
-                    <FaTreeCity className="h-[15px] w-[15px]" />
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="Bengaluru" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="flex">
+                      City*
+                      <FaTreeCity className="h-[15px] w-[15px]" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="Bengaluru" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="country"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel className="flex">
-                    Country*
-                    <AiOutlineGlobal className="h-[15px] w-[15px" />
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="China" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel className="flex">
+                      Country*
+                      <AiOutlineGlobal className="h-[15px] w-[15px" />
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="China" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
-        </div>
-        {isLoading ? (
-          <LoadingButton />
-        ) : (
-          <Button type="submit" className="bg-saffron hover:bg-bgreen">
-            Submit
-          </Button>
-        )}
-      </form>
+          {isLoading ? (
+            <LoadingButton />
+          ) : (
+            <Button type="submit" className="bg-saffron hover:bg-bgreen">
+              Submit
+            </Button>
+          )}
+        </form>
+      </Zoom>
     </Form>
   );
 }

@@ -3,6 +3,14 @@ import React from "react";
 import UserProfileHero from "./UserProfileHero";
 import { Accordion } from "@radix-ui/react-accordion";
 import SectionNameComponent from "./SectionNameComponent";
+import {
+  AttentionSeeker,
+  Fade,
+  Hinge,
+  JackInTheBox,
+  Slide,
+  Zoom,
+} from "react-awesome-reveal";
 
 type Props = {
   children: React.ReactNode;
@@ -24,12 +32,15 @@ function UserProfilePage({ children }: Props) {
               type="single"
               className="flex flex-row w-full md:flex-col gap-1"
             >
-              <SectionNameComponent
-                name="User Profile"
-                comp=""
-                isHeading={true}
-                firstSection={true}
-              />
+              <AttentionSeeker effect="headShake">
+                <SectionNameComponent
+                  name="User Profile"
+                  comp=""
+                  isHeading={true}
+                  firstSection={true}
+                />
+              </AttentionSeeker>
+
               <SectionNameComponent
                 name="User Info"
                 comp="info"
