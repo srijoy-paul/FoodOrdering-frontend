@@ -3,6 +3,14 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Fish } from "lucide-react";
+import { GiChiliPepper } from "react-icons/gi";
+import { GiCoolSpices } from "react-icons/gi";
+import { FaBowlRice } from "react-icons/fa6";
+import { FaTreeCity } from "react-icons/fa6";
+import { AiOutlineGlobal } from "react-icons/ai";
+
 import {
   Form,
   FormControl,
@@ -55,7 +63,10 @@ function UserProfileForm({ onSave, isLoading }: Props) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email*</FormLabel>
+                <FormLabel className="flex">
+                  Email*
+                  <GiChiliPepper className="h-[15px] w-[15px]" />
+                </FormLabel>
                 <FormControl>
                   <Input {...field} disabled placeholder="dummy@gmol.tom" />
                 </FormControl>
@@ -68,7 +79,10 @@ function UserProfileForm({ onSave, isLoading }: Props) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name*</FormLabel>
+                <FormLabel className="flex">
+                  Name*
+                  <Fish className="h-[15px]" />
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="bg-white border-0"
@@ -87,7 +101,10 @@ function UserProfileForm({ onSave, isLoading }: Props) {
               name="addressline1"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Address Line 1*</FormLabel>
+                  <FormLabel className="flex">
+                    Address Line 1*
+                    <GiCoolSpices className="h-[17px] w-[17px]" />
+                  </FormLabel>
                   <FormControl>
                     <Input
                       className="bg-white"
@@ -105,7 +122,10 @@ function UserProfileForm({ onSave, isLoading }: Props) {
               name="city"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>City*</FormLabel>
+                  <FormLabel className="flex">
+                    City*
+                    <FaTreeCity className="h-[15px] w-[15px]" />
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Bengaluru" {...field} />
                   </FormControl>
@@ -119,7 +139,10 @@ function UserProfileForm({ onSave, isLoading }: Props) {
               name="country"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Country*</FormLabel>
+                  <FormLabel className="flex">
+                    Country*
+                    <AiOutlineGlobal className="h-[15px] w-[15px" />
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="China" {...field} />
                   </FormControl>
