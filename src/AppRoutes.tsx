@@ -3,6 +3,7 @@ import Home from "./components/Home/Home";
 import AuthCallbackPage from "./Auth/AuthCallbackPage";
 import UserProfileInfo from "./components/UserProfile Page/UserProfileInfo";
 import UserProfileLanding from "./components/UserProfile Page/UserProfileLanding";
+import ProtectedRoute from "./Auth/ProtectedRoute";
 
 const AppRoutes = () => {
   return (
@@ -10,9 +11,11 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />}></Route>
       <Route path="auth-callback" element={<AuthCallbackPage />}></Route>
 
-      <Route path="user-profile">
-        <Route index element={<UserProfileLanding />}></Route>
-        <Route path="info" element={<UserProfileInfo />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="user-profile">
+          <Route index element={<UserProfileLanding />}></Route>
+          <Route path="info" element={<UserProfileInfo />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<span>Error 404</span>}></Route>
