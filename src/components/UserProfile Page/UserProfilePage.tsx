@@ -3,21 +3,14 @@ import React from "react";
 import UserProfileHero from "./UserProfileHero";
 import { Accordion } from "@radix-ui/react-accordion";
 import SectionNameComponent from "./SectionNameComponent";
-import {
-  AttentionSeeker,
-  Fade,
-  Hinge,
-  JackInTheBox,
-  Slide,
-  Zoom,
-} from "react-awesome-reveal";
+import { AttentionSeeker } from "react-awesome-reveal";
 
 type Props = {
   children: React.ReactNode;
 };
 function UserProfilePage({ children }: Props) {
   return (
-    <Layout>
+    <Layout isAbsolute={false}>
       <div
         className="flex flex-col h-full container gap-8"
         style={{ height: "100%" }}

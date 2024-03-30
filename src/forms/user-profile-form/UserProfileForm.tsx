@@ -1,5 +1,5 @@
-// import React from "react";
-// import PropTypes from "prop-types";
+import { useEffect } from "react";
+
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Fish } from "lucide-react";
 import { GiChiliPepper } from "react-icons/gi";
 import { GiCoolSpices } from "react-icons/gi";
-import { FaBowlRice } from "react-icons/fa6";
 import { FaTreeCity } from "react-icons/fa6";
 import { AiOutlineGlobal } from "react-icons/ai";
 
@@ -24,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/custom_ui/LoadingButton";
 import { Zoom } from "react-awesome-reveal";
+import { User } from "@/types";
 
 const formSchema = z.object({
   email: z.string().optional(),
@@ -36,14 +36,20 @@ const formSchema = z.object({
 type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
+  currentUser: User;
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
 };
 
-function UserProfileForm({ onSave, isLoading }: Props) {
+function UserProfileForm({ currentUser, onSave, isLoading }: Props) {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: currentUser,
   });
+
+  useEffect(() => {
+    form.reset(currentUser);
+  }, [currentUser, form]);
 
   return (
     <Form {...form}>

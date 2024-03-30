@@ -5,7 +5,10 @@ import { Button } from "../ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
 import DropDownMenu from "./DropDown";
 
-function Header({ isAbsolute }) {
+type Props = {
+  isAbsolute: boolean;
+};
+function Header({ isAbsolute }: Props) {
   /**Saffron: #FF9933
 Green: #008000 */
   const { loginWithRedirect, isAuthenticated } = useAuth0();

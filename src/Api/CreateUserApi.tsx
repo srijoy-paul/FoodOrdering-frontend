@@ -1,5 +1,6 @@
+import { User } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -13,7 +14,7 @@ export const useCreateUser = () => {
   const { getAccessTokenSilently } = useAuth0();
   const createUserRequest = async (user: CreateUserRequest) => {
     const accessToken = await getAccessTokenSilently();
-    // console.log("token", accessToken);
+    console.log("token", accessToken);
     // console.log(`Bearer ${accessToken}`);
 
     const response = await fetch(`${API_BASE_URL}/api/v1/user/signup`, {
@@ -90,4 +91,37 @@ export const useUpdateUser = () => {
     reset();
   }
   return { updateUser, isLoading };
+};
+
+export const useGetUser = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const getUserRequest = async (): Promise<User> => {
+    const accessToken = await getAccessTokenSilently();
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/user/getUserInfo`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch user");
+    }
+    const recievedResponse = await response.json();
+    return recievedResponse.userinfo;
+  };
+
+  const {
+    data: currentUser,
+    isLoading,
+    error,
+  } = useQuery("fetchCurrentUser", getUserRequest);
+
+  if (error) {
+    toast.error(error.toString());
+  }
+
+  return { currentUser, isLoading };
 };

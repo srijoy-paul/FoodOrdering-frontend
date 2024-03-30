@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import AuthCallbackPage from "./Auth/AuthCallbackPage";
-import UserProfileForm from "./forms/user-profile-form/UserProfileForm";
-import UserProfilePage from "./components/UserProfile Page/UserProfilePage";
 import UserProfileInfo from "./components/UserProfile Page/UserProfileInfo";
 import UserProfileLanding from "./components/UserProfile Page/UserProfileLanding";
 
