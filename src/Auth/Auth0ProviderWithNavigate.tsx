@@ -1,8 +1,12 @@
 import React from "react";
-import { AppState, Auth0Provider, User } from "@auth0/auth0-react";
+// import { AppState, Auth0Provider, User } from "@auth0/auth0-react";
+import { Auth0Provider } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
-function Auth0ProviderWithNavigate({ children }) {
+type Props = {
+  children: React.ReactNode;
+};
+function Auth0ProviderWithNavigate({ children }: Props) {
   const navigate = useNavigate();
   const VITE_AUTH0_AUDIENCE = import.meta.env.VITE_AUTH0_AUDIENCE;
 
@@ -13,9 +17,9 @@ function Auth0ProviderWithNavigate({ children }) {
   if (!domain || !clientId || !redirectUri || !VITE_AUTH0_AUDIENCE) {
     throw new Error("Unable to initiate Auth");
   }
-
-  const onRedirectCallback = (appState?: AppState, user?: User) => {
-    console.log("user", user, "user sub", user?.sub);
+  // appState?: AppState, user?: User
+  const onRedirectCallback = () => {
+    // console.log("user", user, "user sub", user?.sub);
     navigate("/auth-callback");
   };
   return (
@@ -33,6 +37,6 @@ function Auth0ProviderWithNavigate({ children }) {
   );
 }
 
-Auth0ProviderWithNavigate.propTypes = { children: React.ReactNode };
+// Auth0ProviderWithNavigate.propTypes = { children: React.ReactNode };
 
 export default Auth0ProviderWithNavigate;

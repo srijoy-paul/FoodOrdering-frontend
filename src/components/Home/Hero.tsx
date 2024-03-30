@@ -1,6 +1,3 @@
-import React from "react";
-import HeroImage from "../../assets/HeroImage.jpeg";
-import HeroImage1 from "../../assets/HeroImage1.jpeg";
 import HeroImage2 from "../../assets/HeroImage2.jpeg";
 function Hero() {
   return (

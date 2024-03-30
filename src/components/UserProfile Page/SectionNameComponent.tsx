@@ -1,4 +1,3 @@
-import React from "react";
 import { AccordionItem } from "@/components/ui/accordion";
 import { Link, useLocation } from "react-router-dom";
 

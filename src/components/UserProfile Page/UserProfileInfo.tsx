@@ -1,4 +1,4 @@
-import { useGetMyUser, useGetUser, useUpdateUser } from "@/Api/CreateUserApi";
+import { useGetUser, useUpdateUser } from "@/Api/CreateUserApi";
 import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
 
 import UserProfilePage from "./UserProfilePage";

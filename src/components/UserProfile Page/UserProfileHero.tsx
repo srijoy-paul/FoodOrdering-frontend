@@ -1,4 +1,3 @@
-import React from "react";
 import profilePageHero from "../../assets/ProfilepageHero.jpeg";
 
 function UserProfileHero() {
