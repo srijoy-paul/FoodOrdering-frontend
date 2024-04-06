@@ -4,6 +4,7 @@ import AuthCallbackPage from "./Auth/AuthCallbackPage";
 import UserProfileInfo from "./components/UserProfile Page/UserProfileInfo";
 import UserProfileLanding from "./components/UserProfile Page/UserProfileLanding";
 import ProtectedRoute from "./Auth/ProtectedRoute";
+import ManageRestaurantPage from "./components/ManageRestaurantPage/ManageRestaurantPage";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,8 @@ const AppRoutes = () => {
           <Route index element={<UserProfileLanding />}></Route>
           <Route path="info" element={<UserProfileInfo />} />
         </Route>
+
+        <Route path="manage-restaurant" element={<ManageRestaurantPage />} />
       </Route>
 
       <Route path="*" element={<span>Error 404</span>}></Route>

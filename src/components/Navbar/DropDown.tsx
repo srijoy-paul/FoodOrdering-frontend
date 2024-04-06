@@ -23,6 +23,14 @@ export default function DropDownMenu() {
           <span>{user?.email}</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
+          <Link
+            to="/manage-restaurant"
+            className="font-bold hover:text-saffron"
+          >
+            Manage Restaurant
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
           <Link to="/user-profile" className="font-bold hover:text-saffron">
             Profile
           </Link>
