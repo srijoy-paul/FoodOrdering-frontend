@@ -6,3 +6,21 @@ export type User={
     city:string;
     country:string;
 };
+
+export type MenuItemType={
+    id:number;
+    name:string;
+    price:number;
+}
+
+export type Restaurant={
+    id:number;
+    restaurantname:string;
+    city:string;
+    country:string;
+    deliveryprice:number;
+    cuisines:string[];
+    menuitems:MenuItemType[];
+    imageUrl:string;
+    lastupdated:string;
+}

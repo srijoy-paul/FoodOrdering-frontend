@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { FormDescription, FormField, FormItem } from "@/components/ui/form";
-import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import MenuitemInput from "./MenuitemInput";
 
@@ -8,10 +7,10 @@ export default function MenusSection() {
   const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "menuItems",
+    name: "menuitems",
   });
   return (
-    <div className="space-y-2">
+    <div className="my-3 space-y-2 bg-gray-50 p-2 text-saffron">
       <div>
         <h2 className="text-2xl font-bold">Menu</h2>
         <FormDescription>
@@ -32,7 +31,11 @@ export default function MenusSection() {
           </FormItem>
         )}
       />
-      <Button type="button" onClick={() => append({ name: "", price: "" })}>
+      <Button
+        className="bg-saffron hover:bg-bgreen"
+        type="button"
+        onClick={() => append({ name: "", price: 0 })}
+      >
         Add Menu Item
       </Button>
     </div>

@@ -12,7 +12,7 @@ import { useFormContext } from "react-hook-form";
 function DetailsSection() {
   const { control } = useFormContext();
   return (
-    <div className="my-3 bg-gray-100 p-2 text-saffron">
+    <div className="my-3 space-y-2 bg-gray-50 p-2 text-saffron">
       <div>
         <h2 className="text-2xl font-bold">Details</h2>
         <FormDescription>
@@ -26,7 +26,7 @@ function DetailsSection() {
           <FormItem>
             <FormLabel>Name</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="Tom Scott" />
+              <Input {...field} placeholder="Mangsho Hut" />
             </FormControl>
             <FormMessage />
           </FormItem>

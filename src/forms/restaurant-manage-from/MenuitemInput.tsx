@@ -15,6 +15,7 @@ type Props = {
 };
 function MenuitemInput({ index, removeMenuItem }: Props) {
   const { control } = useFormContext();
+
   return (
     <div className="flex flex-row item-end gap-2">
       <FormField
@@ -44,17 +45,13 @@ function MenuitemInput({ index, removeMenuItem }: Props) {
               Price (₹) <FormMessage />
             </FormLabel>
             <FormControl>
-              <Input
-                {...field}
-                placeholder="Manghso Bhaat"
-                className="bg-white"
-              />
+              <Input {...field} placeholder="750" className="bg-white" />
             </FormControl>
           </FormItem>
         )}
       />
       <Button
-        className="bg-saffron max-h-fit"
+        className="bg-saffron hover:bg-bgreen h-full py-2.5 self-end"
         type="button"
         onClick={removeMenuItem}
       >

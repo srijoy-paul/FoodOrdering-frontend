@@ -14,7 +14,7 @@ export const useCreateUser = () => {
   const { getAccessTokenSilently } = useAuth0();
   const createUserRequest = async (user: CreateUserRequest) => {
     const accessToken = await getAccessTokenSilently();
-    console.log("token", accessToken);
+    // console.log("token", accessToken);
     // console.log(`Bearer ${accessToken}`);
 
     const response = await fetch(`${API_BASE_URL}/api/v1/user/signup`, {
@@ -25,13 +25,12 @@ export const useCreateUser = () => {
       },
       body: JSON.stringify(user),
     });
-    console.log(response);
-    const compiledResponse = await response.json();
-    console.log(compiledResponse);
-
+    // console.log(response);
     if (!response.ok) {
       throw new Error("Failed to create User");
     }
+    const compiledResponse = await response.json();
+    console.log(compiledResponse);
   };
   const {
     mutateAsync: createUser,

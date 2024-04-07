@@ -5,15 +5,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cuisineList } from "@/lib/restaurant-cuisines-list-utils";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import CuisineCheckBox from "./CuisineCheckBox";
 
 function CuisinesSection() {
   const { control } = useFormContext();
   return (
-    <div className="my-3">
+    <div className="my-3 space-y-2 bg-gray-50 p-2 text-saffron">
       <div>
+        <h2 className="text-2xl font-bold">Cuisines</h2>
         <FormDescription>
           Select the cuisines that your restaurant servers
         </FormDescription>
