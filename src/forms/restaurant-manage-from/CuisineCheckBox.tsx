@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { FormControl, FormItem, FormLabel } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";

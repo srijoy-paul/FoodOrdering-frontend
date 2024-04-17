@@ -24,7 +24,7 @@ function DetailsSection() {
         name="restaurantname"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>Restaurant Name</FormLabel>
             <FormControl>
               <Input {...field} placeholder="Mangsho Hut" />
             </FormControl>
@@ -82,7 +82,7 @@ function DetailsSection() {
             <FormItem className="flex-1">
               <FormLabel>Estimated Delivery Time</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} type="time" step="1" />
               </FormControl>
               <FormMessage />
             </FormItem>

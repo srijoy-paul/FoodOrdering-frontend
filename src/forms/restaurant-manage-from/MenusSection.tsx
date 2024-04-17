@@ -24,6 +24,7 @@ export default function MenusSection() {
           <FormItem className="flex flex-col gap-2">
             {fields.map((_, index) => (
               <MenuitemInput
+                key={index}
                 index={index}
                 removeMenuItem={() => remove(index)}
               />
@@ -34,7 +35,7 @@ export default function MenusSection() {
       <Button
         className="bg-saffron hover:bg-bgreen"
         type="button"
-        onClick={() => append({ name: "", price: 0 })}
+        onClick={() => append({ name: "", price: "" })}
       >
         Add Menu Item
       </Button>

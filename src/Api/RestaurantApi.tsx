@@ -11,27 +11,48 @@ export const useCreateRestaurant = () => {
   const createRestaurantRequest = async (
     restaurantFormData: FormData
   ): Promise<Restaurant> => {
+    console.log("enter");
+
     const accessToken = await getAccessTokenSilently();
+    console.log(accessToken);
 
-    const response = await fetch(
-      `${API_BASE_URL}/api/v1/restaurant/createRestaurant`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: restaurantFormData,
+    restaurantFormData.forEach((value, key) => {
+      console.log(`create form data ${key}: Value ${value}`);
+    });
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/v1/restaurant/createRestaurant`,
+        {
+          method: "POST",
+          headers: {
+            // "Content-Type":
+            //   "multipart/form-data; boundary=<calculated when request is sent>",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: restaurantFormData,
+        }
+      );
+
+      const parsedResponse = await response.json();
+      console.log("from createRestro hook", parsedResponse);
+
+      if (!response.ok) {
+        console.log(response);
+
+        throw new Error("Failed to create your restaurant");
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Failed to create restaurant");
+      return parsedResponse;
+    } catch (error) {
+      console.error("Error creating restaurant:", error);
+      throw error;
     }
 
-    const parsedResponse = await response.json();
-    console.log("from createRestro hook", parsedResponse);
+    // const parsedResponse = await response.json();
+    // console.log("from createRestro hook", parsedResponse);
 
-    return parsedResponse;
+    // return parsedResponse;
   };
 
   const {
@@ -46,6 +67,8 @@ export const useCreateRestaurant = () => {
   }
 
   if (error) {
+    console.log(error);
+
     toast.error("Unable to update restaurant");
   }
 

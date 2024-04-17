@@ -3,6 +3,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
@@ -41,6 +42,7 @@ function ImageSection() {
                   }
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

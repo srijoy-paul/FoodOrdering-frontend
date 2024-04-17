@@ -23,6 +23,10 @@ const formSchema = z.object({
   country: z.string({
     required_error: "country name is required",
   }),
+  // deliveryprice: z.string({
+  //   required_error: "delivery price is required",
+  //   invalid_type_error: "must be a valid number",
+  // }),
   deliveryprice: z.coerce.number({
     required_error: "delivery price is required",
     invalid_type_error: "must be a valid number",
@@ -43,7 +47,7 @@ const formSchema = z.object({
   imageFile: z.instanceof(File, { message: "image is required" }),
 });
 
-type restaurantFormData = z.infer<typeof formSchema>;
+type RestaurantFormData = z.infer<typeof formSchema>;
 
 type Props = {
   onSave: (restaurantFormData: FormData) => void;
@@ -51,16 +55,19 @@ type Props = {
 };
 
 function ManageRestaurantForm({ onSave, isLoading }: Props) {
-  const form = useForm<restaurantFormData>({
+  const form = useForm<RestaurantFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      restaurantname: "Bengal's Biriyani House",
       cuisines: [],
-      menuitems: [{ name: "", price: 0 }],
+      menuitems: [{ name: "Chicken Dum Biriyani with Raita", price: 2400 }],
     },
   });
 
-  const onSubmit = (formDataJson: restaurantFormData) => {
+  const onSubmit = (formDataJson: RestaurantFormData) => {
     const formData = new FormData();
+    console.log("formdata json", typeof formDataJson, formDataJson);
+
     formData.append("restaurantname", formDataJson.restaurantname);
     formData.append("city", formDataJson.city);
     formData.append("country", formDataJson.country);
@@ -75,9 +82,19 @@ function ManageRestaurantForm({ onSave, isLoading }: Props) {
     formDataJson.menuitems.forEach((menuItem, index) => {
       formData.append(`menuitems[${index}][name]`, menuItem.name);
       formData.append(`menuitems[${index}][price]`, menuItem.price.toString());
-      formData.append(`imageFile`, formDataJson.imageFile);
-      onSave(formData);
     });
+
+    if (formDataJson.imageFile instanceof File) {
+      formData.append(`imageFile`, formDataJson.imageFile);
+    } else {
+      console.error("imageFile is not a valid File instance");
+    }
+
+    formData.forEach((value, key) => {
+      console.log(`Hey Hey --- > Key: ${key},Value: ${value}`);
+    });
+
+    onSave(formData);
   };
 
   return (
