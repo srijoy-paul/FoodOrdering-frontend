@@ -1,9 +1,39 @@
 import { Restaurant } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const useGetRestaurant = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const getRestaurantRequest = async (): Promise<Restaurant> => {
+    const accessToken = await getAccessTokenSilently();
+    console.log(accessToken);
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/restaurant/getInfo`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch restaurant data");
+    }
+
+    const parsedResponse = await response.json();
+    console.log(parsedResponse);
+    return parsedResponse.restaurantData;
+  };
+
+  const { data: restaurant, isLoading } = useQuery(
+    "fetchMyRestaurant",
+    getRestaurantRequest
+  );
+  return { restaurant, isLoading };
+};
 
 export const useCreateRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
@@ -14,11 +44,11 @@ export const useCreateRestaurant = () => {
     console.log("enter");
 
     const accessToken = await getAccessTokenSilently();
-    console.log(accessToken);
+    // console.log(accessToken);
 
-    restaurantFormData.forEach((value, key) => {
-      console.log(`create form data ${key}: Value ${value}`);
-    });
+    // restaurantFormData.forEach((value, key) => {
+    //   console.log(`create form data ${key}: Value ${value}`);
+    // });
 
     try {
       const response = await fetch(

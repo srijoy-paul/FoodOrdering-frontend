@@ -12,6 +12,8 @@ import Layout from "@/layouts/Layout";
 import ImageSection from "./ImageSection";
 import LoadingButton from "@/components/custom_ui/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { Restaurant } from "@/types";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   restaurantname: z.string({
@@ -23,10 +25,6 @@ const formSchema = z.object({
   country: z.string({
     required_error: "country name is required",
   }),
-  // deliveryprice: z.string({
-  //   required_error: "delivery price is required",
-  //   invalid_type_error: "must be a valid number",
-  // }),
   deliveryprice: z.coerce.number({
     required_error: "delivery price is required",
     invalid_type_error: "must be a valid number",
@@ -52,17 +50,26 @@ type RestaurantFormData = z.infer<typeof formSchema>;
 type Props = {
   onSave: (restaurantFormData: FormData) => void;
   isLoading: boolean;
+  restaurant?: Restaurant;
 };
 
-function ManageRestaurantForm({ onSave, isLoading }: Props) {
+function ManageRestaurantForm({ onSave, isLoading, restaurant }: Props) {
   const form = useForm<RestaurantFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      restaurantname: "Bengal's Biriyani House",
+      // restaurantname: "Bengal's Biriyani House",
       cuisines: [],
-      menuitems: [{ name: "Chicken Dum Biriyani with Raita", price: 2400 }],
+      menuitems: [{ name: "", price: 0 }],
     },
   });
+
+  useEffect(() => {
+    if (!restaurant) {
+      return;
+    }
+
+    form.reset(restaurant);
+  }, [form, restaurant]);
 
   const onSubmit = (formDataJson: RestaurantFormData) => {
     const formData = new FormData();
