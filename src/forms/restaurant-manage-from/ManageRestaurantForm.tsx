@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import DetailsSection from "./DetailsSection";
 import CuisinesSection from "./CuisinesSection";
 import MenusSection from "./MenusSection";
-import Layout from "@/layouts/Layout";
+
 import ImageSection from "./ImageSection";
 import LoadingButton from "@/components/custom_ui/LoadingButton";
 import { Button } from "@/components/ui/button";
@@ -42,8 +42,13 @@ const formSchema = z.object({
       price: z.coerce.number().min(1, "price is required"),
     })
   ),
+  // imageUrl: z.string().optional(),
   imageFile: z.instanceof(File, { message: "image is required" }),
 });
+// .refine((data) => data.imageUrl || data.imageFile, {
+//   message: "Either, image URL or image file must be provided",
+//   path: ["imageFile"],
+// });
 
 type RestaurantFormData = z.infer<typeof formSchema>;
 
@@ -97,36 +102,37 @@ function ManageRestaurantForm({ onSave, isLoading, restaurant }: Props) {
       console.error("imageFile is not a valid File instance");
     }
 
-    formData.forEach((value, key) => {
-      console.log(`Hey Hey --- > Key: ${key},Value: ${value}`);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(`Hey Hey --- > Key: ${key},Value: ${value}`);
+    // });
 
     onSave(formData);
   };
 
   return (
-    <Layout isAbsolute={false}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="container">
-          <DetailsSection />
-          <Separator />
-          <CuisinesSection />
-          <Separator />
-          <MenusSection />
-          <Separator />
-          <ImageSection />
-          <div className="my-3 space-y-2 flex place-content-center ">
-            {isLoading ? (
-              <LoadingButton />
-            ) : (
-              <Button className="bg-saffron p-6 hover:bg-bgreen" type="submit">
-                Submit
-              </Button>
-            )}
-          </div>
-        </form>
-      </Form>
-    </Layout>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="container">
+        <h1 className="text-2xl font-bold font-mono py-3 text-center">
+          Restaurant Information
+        </h1>
+        <DetailsSection />
+        <Separator />
+        <CuisinesSection />
+        <Separator />
+        <MenusSection />
+        <Separator />
+        <ImageSection />
+        <div className="my-3 space-y-2 flex place-content-center ">
+          {isLoading ? (
+            <LoadingButton />
+          ) : (
+            <Button className="bg-saffron p-6 hover:bg-bgreen" type="submit">
+              Submit
+            </Button>
+          )}
+        </div>
+      </form>
+    </Form>
   );
 }
 
