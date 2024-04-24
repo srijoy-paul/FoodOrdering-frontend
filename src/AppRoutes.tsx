@@ -7,12 +7,22 @@ import ProtectedRoute from "./Auth/ProtectedRoute";
 import ManageRestaurantPage from "./components/ManageRestaurantPage/ManageRestaurantPage";
 import ManageRestaurantLanding from "./components/ManageRestaurantPage/ManageRestaurantLanding";
 import ManageRestaurantInfoPage from "./components/ManageRestaurantPage/ManageRestaurantInfoPage";
+import Layout from "./layouts/Layout";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="auth-callback" element={<AuthCallbackPage />}></Route>
+      <Route
+        path="/search/:city"
+        element={
+          <Layout>
+            <SearchPage></SearchPage>
+          </Layout>
+        }
+      ></Route>
 
       <Route element={<ProtectedRoute />}>
         <Route path="user-profile">
