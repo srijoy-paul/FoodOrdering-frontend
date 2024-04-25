@@ -7,5 +7,12 @@ export const cuisineList=[
     "Telebhaja O Muri",
     "Mishti O Pitha",
     "Torkari O Chutney",
-    "Nirbachito Rannaghor"
+    "Nirbachito Rannaghor",
+    "Indian Cuisine",
+    "Continental Cuisine",
+    "Thai Cuisine",
+    "Japanese Cuisine",
+    "Mediterranean Cuisine",
+    "Vegetarian and Vegan Cuisine",
+    "Fast Food and Snacks"
 ]
