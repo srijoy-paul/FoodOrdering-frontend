@@ -2,7 +2,7 @@ import {
   useCreateRestaurant,
   useGetRestaurant,
   useUpdateRestaurant,
-} from "@/Api/RestaurantApi";
+} from "@/Api/ManageRestaurantApi";
 import ManageRestaurantForm from "@/forms/restaurant-manage-from/ManageRestaurantForm";
 // import ManageRestaurantPage from "./ManageRestaurantPage";
 import ManageRestaurantInfoPageLayout from "./ManageRestaurantInfoPageLayout";

@@ -15,12 +15,18 @@ export type MenuItemType={
 
 export type Restaurant={
     // id:number;
+    restaurantid:number,
     restaurantname:string;
     city:string;
     country:string;
     deliveryprice:number;
+    estimateddeliverytime:string;
     cuisines:string[];
     menuitems:MenuItemType[];
     imageUrl:string;
     lastupdated:string;
+}
+
+export type RestaurantSearchResponse={
+    data:Restaurant[];
 }

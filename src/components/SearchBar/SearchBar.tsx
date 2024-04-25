@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,7 +41,7 @@ function SearchBar({ onSubmit, placeholder, onReset }: Props) {
   return (
     <Form {...form}>
       <form
-        className={`w-[70%] p-2 flex items-center self-center flex-1 gap-3 justify-between flex-row border-2 rounded-full  ${
+        className={`w-[70%] p-2 flex items-center self-center flex-1 gap-3 justify-between flex-row border-2 rounded-full ${
           form.formState.errors.searchquery && "border-red-400"
         }`}
         onSubmit={form.handleSubmit(onSubmit)}

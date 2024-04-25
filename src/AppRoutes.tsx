@@ -18,7 +18,7 @@ const AppRoutes = () => {
       <Route
         path="/search/:city"
         element={
-          <Layout>
+          <Layout isAbsolute={false}>
             <SearchPage></SearchPage>
           </Layout>
         }

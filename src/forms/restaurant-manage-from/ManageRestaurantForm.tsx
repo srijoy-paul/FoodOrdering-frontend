@@ -15,40 +15,41 @@ import { Button } from "@/components/ui/button";
 import { Restaurant } from "@/types";
 import { useEffect } from "react";
 
-const formSchema = z.object({
-  restaurantname: z.string({
-    required_error: "restaurant name is required",
-  }),
-  city: z.string({
-    required_error: "city name is required",
-  }),
-  country: z.string({
-    required_error: "country name is required",
-  }),
-  deliveryprice: z.coerce.number({
-    required_error: "delivery price is required",
-    invalid_type_error: "must be a valid number",
-  }),
-  estimateddeliverytime: z.string({
-    required_error: "delivery time is required",
-    invalid_type_error: "must be a valid time and date",
-  }),
-  cuisines: z.array(z.string()).nonempty({
-    message: "Please select at least one item",
-  }),
-  menuitems: z.array(
-    z.object({
-      name: z.string().min(1, "name is required"),
-      price: z.coerce.number().min(1, "price is required"),
-    })
-  ),
-  // imageUrl: z.string().optional(),
-  imageFile: z.instanceof(File, { message: "image is required" }),
-});
-// .refine((data) => data.imageUrl || data.imageFile, {
-//   message: "Either, image URL or image file must be provided",
-//   path: ["imageFile"],
-// });
+const formSchema = z
+  .object({
+    restaurantname: z.string({
+      required_error: "restaurant name is required",
+    }),
+    city: z.string({
+      required_error: "city name is required",
+    }),
+    country: z.string({
+      required_error: "country name is required",
+    }),
+    deliveryprice: z.coerce.number({
+      required_error: "delivery price is required",
+      invalid_type_error: "must be a valid number",
+    }),
+    estimateddeliverytime: z.string({
+      required_error: "delivery time is required",
+      invalid_type_error: "must be a valid time and date",
+    }),
+    cuisines: z.array(z.string()).nonempty({
+      message: "Please select at least one item",
+    }),
+    menuitems: z.array(
+      z.object({
+        name: z.string().min(1, "name is required"),
+        price: z.coerce.number().min(1, "price is required"),
+      })
+    ),
+    imageUrl: z.string().optional(),
+    imageFile: z.instanceof(File, { message: "image is required" }),
+  })
+  .refine((data) => data.imageUrl || data.imageFile, {
+    message: "Either, image URL or image file must be provided",
+    path: ["imageFile"],
+  });
 
 type RestaurantFormData = z.infer<typeof formSchema>;
 
