@@ -27,11 +27,15 @@ const sort_options = [
 ];
 
 function SortOptionsDropdown({ onChange, sortOption }: Props) {
+  const selectedSortLabel =
+    sort_options.find(
+      (option: { label: string; value: string }) => option.value === sortOption
+    )?.label || sort_options[0].label;
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-pointer">
-          <Button variant={"outline"}>Sort By: {sortOption}</Button>
+          <Button variant={"outline"}>Sort By: {selectedSortLabel}</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {sort_options.map((option) => (
