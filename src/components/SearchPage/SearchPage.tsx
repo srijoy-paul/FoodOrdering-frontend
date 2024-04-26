@@ -23,6 +23,7 @@ import CuisineFilter from "./CuisineFilter";
 export type SearchState = {
   searchquery: string;
   page: number;
+  selectedcuisines: string[];
 };
 
 function SearchPage() {
@@ -30,7 +31,10 @@ function SearchPage() {
   const [SearchState, setSearchState] = useState<SearchState>({
     searchquery: "",
     page: 1,
+    selectedcuisines: [],
   });
+
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const { results } = useSearchRestaurants(SearchState, city);
   console.log(city, typeof city);
 
@@ -40,6 +44,14 @@ function SearchPage() {
 
     return <span>No results Found</span>;
   }
+
+  const setSelectedCuisines = (selectedcuisines: string[]) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      selectedcuisines,
+      page: 1,
+    }));
+  };
 
   const setPage = (page: number) => {
     setSearchState((prevState) => ({
@@ -65,9 +77,14 @@ function SearchPage() {
   };
 
   return (
-    <div className="container grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div id="cuisines-list" className="border-2 border-red-100">
-        <CuisineFilter />
+    <div className="container grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5 mb-5">
+      <div id="cuisines-list" className="">
+        <CuisineFilter
+          selectedCuisines={SearchState.selectedcuisines}
+          onChange={setSelectedCuisines}
+          isExpanded={isExpanded}
+          onExpandedClick={() => setIsExpanded((prevState) => !prevState)}
+        />
       </div>
       <div id="restrauants-list" className=" flex flex-col gap-5">
         <SearchBar

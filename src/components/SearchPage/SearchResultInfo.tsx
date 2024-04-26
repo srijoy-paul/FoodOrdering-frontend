@@ -8,13 +8,13 @@ type Props = {
 
 function SearchResultInfo({ total, city, country }: Props) {
   return (
-    <div className=" container text-xl font-bold flex flex-col gap-3 justify-between lg:items-center lg:flex-row ">
+    <div className=" md:container text-lg md:text-xl font-bold flex flex-col gap-3 justify-between lg:items-center lg:flex-row">
       {/* //px-16 */}
-      <span>
+      <span className="flex flex-row">
         {total} Food Delivery Restaurants in {city},{country}
         <Link
           to="/"
-          className="ml-2 text-sm font-semibold underline cursor-pointer text-saffron"
+          className="ml-2 text-xs md:text-sm font-semibold underline cursor-pointer text-saffron  break-keep flex items-center"
         >
           Change Location ?
         </Link>

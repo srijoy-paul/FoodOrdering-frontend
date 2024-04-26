@@ -12,7 +12,7 @@ function SearchResultCard({ restaurant }: Props) {
   return (
     <Link
       to={`/detail/${restaurant.restaurantid}`}
-      className=" rounded-lg flex flex-col group md:w-[45%]"
+      className=" rounded-lg flex flex-col group md:w-[45%] hover:shadow-md"
     >
       <div
         id="card-media"
@@ -31,23 +31,25 @@ function SearchResultCard({ restaurant }: Props) {
 
       <div
         id="card-content"
-        className="grid grid-cols-[3fr_2fr] gap-2"
+        className="grid grid-cols-[3fr_2fr] gap-1"
         // style={{ flex: "3" }}
       >
-        <div className="content-left flex flex-col p-2">
+        <div className="content-left flex flex-col p-2 ">
           <span className="text-2xl font-bold tracking-tight mb-2 group-hover:underline">
             {restaurant.restaurantname}
           </span>
           <span className="flex flex-row flex-wrap">
             {restaurant.cuisines.map((item, index) => (
-              <span className="flex">
+              <span className="flex items-center ">
                 <span className="text-xs">{item}</span>
-                <span>{index < restaurant.cuisines.length - 1 && <Dot />}</span>
+                <span>
+                  {index < restaurant.cuisines.length - 1 && <Dot size={20} />}
+                </span>
               </span>
             ))}
           </span>
         </div>
-        <div className="content-righ flex flex-col items-end gap-2 p-2">
+        <div className="content-righ flex flex-col items-end gap-2 p-2 ">
           <span className="flex items-center gap-1">
             <MdOutlineDeliveryDining />
             Delivery from ₹{restaurant.deliveryprice}

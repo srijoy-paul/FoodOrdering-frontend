@@ -47,7 +47,7 @@ function SearchBar({ onSubmit, placeholder, onReset, searchquery }: Props) {
   return (
     <Form {...form}>
       <form
-        className={`w-[70%] p-2 flex items-center self-center flex-1 gap-3 justify-between flex-row border-2 rounded-full ${
+        className={`md:w-[70%] p-2 flex items-center self-center gap-3 justify-between flex-row border-2 rounded-full ${
           form.formState.errors.searchquery && "border-red-400"
         }`}
         onSubmit={form.handleSubmit(onSubmit)}
@@ -84,7 +84,10 @@ function SearchBar({ onSubmit, placeholder, onReset, searchquery }: Props) {
           Reset
         </Button>
 
-        <Button type="submit" className="rounded-full bg-saffron">
+        <Button
+          type="submit"
+          className="rounded-full bg-saffron hover:bg-bgreen"
+        >
           Search
         </Button>
       </form>
