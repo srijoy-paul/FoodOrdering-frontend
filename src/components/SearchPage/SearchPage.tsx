@@ -5,6 +5,8 @@ import SearchResultInfo from "./SearchResultInfo";
 import SearchResultCard from "./SearchResultCard";
 import { useState } from "react";
 import SearchBar, { SearchForm } from "../SearchBar/SearchBar";
+import PaginationSelector from "../Pagination/PaginationSelector";
+import CuisineFilter from "./CuisineFilter";
 
 // type typeresults = {
 //   results: {
@@ -20,12 +22,14 @@ import SearchBar, { SearchForm } from "../SearchBar/SearchBar";
 
 export type SearchState = {
   searchquery: string;
+  page: number;
 };
 
 function SearchPage() {
   const { city } = useParams();
   const [SearchState, setSearchState] = useState<SearchState>({
     searchquery: "",
+    page: 1,
   });
   const { results } = useSearchRestaurants(SearchState, city);
   console.log(city, typeof city);
@@ -37,10 +41,18 @@ function SearchPage() {
     return <span>No results Found</span>;
   }
 
+  const setPage = (page: number) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      page,
+    }));
+  };
+
   const setSearchQuery = (searchFromData: SearchForm) => {
     setSearchState((prevState) => ({
       ...prevState,
       searchquery: searchFromData.searchquery,
+      page: 1,
     }));
   };
 
@@ -48,13 +60,14 @@ function SearchPage() {
     setSearchState((prevState) => ({
       ...prevState,
       searchQuery: "",
+      page: 1,
     }));
   };
 
   return (
     <div className="container grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
       <div id="cuisines-list" className="border-2 border-red-100">
-        Cuisines List here
+        <CuisineFilter />
       </div>
       <div id="restrauants-list" className=" flex flex-col gap-5">
         <SearchBar
@@ -72,6 +85,12 @@ function SearchPage() {
           {results?.data.map((restaurant: Restaurant) => (
             <SearchResultCard restaurant={restaurant} />
           ))}
+
+          <PaginationSelector
+            page={results?.pageParameters?.page}
+            pages={results?.pageParameters?.pages}
+            onPageChange={setPage}
+          />
         </div>
       </div>
     </div>
