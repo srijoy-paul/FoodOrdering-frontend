@@ -107,7 +107,7 @@ function SearchPage() {
         <div className=" md:container flex flex-col md:flex-row justify-between">
           <SearchResultInfo
             total={results?.pageParameters?.total}
-            city={city}
+            city={city || ""}
             country={results?.data[0]?.country}
           />
 

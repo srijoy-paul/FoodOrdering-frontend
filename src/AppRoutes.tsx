@@ -4,7 +4,7 @@ import AuthCallbackPage from "./Auth/AuthCallbackPage";
 import UserProfileInfo from "./components/UserProfile Page/UserProfileInfo";
 import UserProfileLanding from "./components/UserProfile Page/UserProfileLanding";
 import ProtectedRoute from "./Auth/ProtectedRoute";
-import ManageRestaurantPage from "./components/ManageRestaurantPage/ManageRestaurantPage";
+// import ManageRestaurantPage from "./components/ManageRestaurantPage/ManageRestaurantPage";
 import ManageRestaurantLanding from "./components/ManageRestaurantPage/ManageRestaurantLanding";
 import ManageRestaurantInfoPage from "./components/ManageRestaurantPage/ManageRestaurantInfoPage";
 import Layout from "./layouts/Layout";

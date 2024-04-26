@@ -24,6 +24,7 @@ function Home() {
         <SearchBar
           placeholder="Search by City or Town"
           onSubmit={handleSearchSubmit}
+          searchquery=""
         />
       </div>
 

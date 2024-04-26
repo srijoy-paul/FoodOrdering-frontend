@@ -1,5 +1,5 @@
 import { cuisineList } from "@/lib/restaurant-cuisines-list-utils";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { Label } from "../ui/label";
 import { Check } from "lucide-react";
 import { Button } from "../ui/button";
