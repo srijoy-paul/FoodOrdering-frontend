@@ -9,6 +9,7 @@ import ManageRestaurantLanding from "./components/ManageRestaurantPage/ManageRes
 import ManageRestaurantInfoPage from "./components/ManageRestaurantPage/ManageRestaurantInfoPage";
 import Layout from "./layouts/Layout";
 import SearchPage from "./components/SearchPage/SearchPage";
+import RestaurantDetailPage from "./components/RestaurantDetailspage/RestaurantDetailPage";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,15 @@ const AppRoutes = () => {
         element={
           <Layout isAbsolute={false}>
             <SearchPage></SearchPage>
+          </Layout>
+        }
+      ></Route>
+
+      <Route
+        path="/restaurantDetail/:restaurantid"
+        element={
+          <Layout isAbsolute={false}>
+            <RestaurantDetailPage></RestaurantDetailPage>
           </Layout>
         }
       ></Route>

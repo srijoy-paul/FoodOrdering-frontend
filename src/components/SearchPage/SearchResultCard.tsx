@@ -11,7 +11,7 @@ type Props = {
 function SearchResultCard({ restaurant }: Props) {
   return (
     <Link
-      to={`/detail/${restaurant.restaurantid}`}
+      to={`/restaurantDetail/${restaurant.restaurantid}`}
       className=" rounded-lg flex flex-col group md:w-[45%] hover:shadow-md"
     >
       <div
