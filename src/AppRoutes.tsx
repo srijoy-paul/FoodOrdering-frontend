@@ -25,14 +25,17 @@ const AppRoutes = () => {
         }
       ></Route>
 
-      <Route
-        path="/restaurantDetail/:restaurantid"
-        element={
-          <Layout isAbsolute={false}>
-            <RestaurantDetailPage></RestaurantDetailPage>
-          </Layout>
-        }
-      ></Route>
+      <Route path="restaurantDetail/:restaurantid">
+        <Route
+          index
+          element={
+            <Layout isAbsolute={false}>
+              <RestaurantDetailPage></RestaurantDetailPage>
+            </Layout>
+          }
+        ></Route>
+        <Route path="reviews" element={<span>Reviews</span>}></Route>
+      </Route>
 
       <Route element={<ProtectedRoute />}>
         <Route path="user-profile">

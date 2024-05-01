@@ -8,7 +8,7 @@ export type User={
 };
 
 export type MenuItemType={
-    id:number;
+    id:string;
     name:string;
     price:number;
 }

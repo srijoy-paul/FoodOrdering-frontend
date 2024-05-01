@@ -3,35 +3,93 @@ import { useParams } from "react-router-dom";
 import { AspectRatio } from "../ui/aspect-ratio";
 import RestaurantInfo from "./RestaurantInfo";
 import MenuItem from "./MenuItem";
+import { useState } from "react";
+import { Card } from "../ui/card";
+import OrderSummary from "./OrderSummary";
+import { MenuItemType } from "@/types";
+
+export type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+};
 
 function RestaurantDetailPage() {
   const { restaurantid } = useParams();
-  console.log("From detail page", restaurantid);
+  // console.log("From detail page", restaurantid);
 
   const { restaurant, isLoading } = useGetRestaurant(restaurantid);
+
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  const addToCart = (menuitem: MenuItemType) => {
+    setCartItems((prevCartItems) => {
+      const existingCartItem = prevCartItems.find(
+        (cartitem) => cartitem.id === menuitem.id
+      );
+      console.log("existingCartItem", existingCartItem);
+
+      let updatedCartItems;
+
+      if (existingCartItem) {
+        updatedCartItems = prevCartItems.map((cartitem) =>
+          cartitem.id === menuitem.id
+            ? { ...cartitem, quantity: cartitem.quantity + 1 }
+            : cartitem
+        );
+      } else {
+        updatedCartItems = [
+          ...prevCartItems,
+          {
+            id: menuitem.id,
+            name: menuitem.name,
+            price: menuitem.price,
+            quantity: 1,
+          },
+        ];
+      }
+      return updatedCartItems;
+    });
+  };
 
   console.log(restaurant);
 
   if (isLoading || !restaurant) {
-    return <div className="container">loading...</div>;
+    return <div className="container">Loading...</div>;
   }
   return (
-    <div className="container">
+    <div className="container ">
       <AspectRatio ratio={16 / 5}>
         <img
-          className="rounded-md object-cover zoom-out-50 h-full w-full"
+          className="rounded-md object-cover h-full w-full"
           src={restaurant.imageurl}
           alt={restaurant.restaurantname}
           title={restaurant.restaurantname}
         />
       </AspectRatio>
-      <div className="grid md:grid-cols-[4fr_2fr] gap-5 md:px-32 border-2 border-emerald-300 pb-2">
-        <div className="flex flex-col gap-4">
+      <div className="grid md:grid-cols-[4fr_2fr] gap-5 md:px-32  pb-2">
+        <div className="flex flex-col gap-4 border-3 border-green-200">
           <RestaurantInfo restaurant={restaurant} />
           <span className="text-2xl font-bold tracking-tight">Menu</span>
           {restaurant.menuitems.map((menuitem) => (
-            <MenuItem menuitem={menuitem} />
+            <MenuItem
+              key={menuitem.id}
+              menuitem={menuitem}
+              cartitems={
+                cartItems.length != 0
+                  ? cartItems.find((cartitem) => menuitem.id === cartitem.id)
+                  : undefined
+              }
+              addToCart={() => addToCart(menuitem)}
+            />
           ))}
+        </div>
+
+        <div>
+          <Card className="my-2">
+            <OrderSummary restaurant={restaurant} cartitems={cartItems} />
+          </Card>
         </div>
       </div>
     </div>
