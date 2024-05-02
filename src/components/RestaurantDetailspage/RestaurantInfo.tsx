@@ -12,6 +12,7 @@ import { LiaDirectionsSolid } from "react-icons/lia";
 import { FaRegHeart } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { Badge } from "../ui/badge";
 
 type Props = {
   restaurant: Restaurant;
@@ -77,6 +78,11 @@ function RestaurantInfo({ restaurant }: Props) {
             <RiShareForwardLine className="text-saffron " size={18} />
             <span className="text-lg font-light">Share</span>
           </Button>
+        </div>
+        <div id="Offerings">
+          <Badge className="py-1 px-3 bg-bgreen text-slate-50 hover:bg-green-600">
+            Free Delivery Above ₹199
+          </Badge>
         </div>
         <div className="flex gap-2 border-b border-saffron">
           <span className="p-3 cursor-pointer hover:bg-orange-50 border-b border-saffron">

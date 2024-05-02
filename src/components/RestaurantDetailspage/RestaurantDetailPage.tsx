@@ -25,6 +25,14 @@ function RestaurantDetailPage() {
 
   const addToCart = (menuitem: MenuItemType) => {
     setCartItems((prevCartItems) => {
+      const totalQuantity = prevCartItems.reduce(
+        (total, cartitem) => total + cartitem.quantity,
+        0
+      );
+      if (totalQuantity >= 10) {
+        return prevCartItems;
+      }
+
       const existingCartItem = prevCartItems.find(
         (cartitem) => cartitem.id === menuitem.id
       );
@@ -35,7 +43,9 @@ function RestaurantDetailPage() {
       if (existingCartItem) {
         updatedCartItems = prevCartItems.map((cartitem) =>
           cartitem.id === menuitem.id
-            ? { ...cartitem, quantity: cartitem.quantity + 1 }
+            ? cartitem.quantity < 10
+              ? { ...cartitem, quantity: cartitem.quantity + 1 }
+              : cartitem
             : cartitem
         );
       } else {
@@ -53,6 +63,22 @@ function RestaurantDetailPage() {
     });
   };
 
+  const removeFromCart = (cartItem: CartItem) => {
+    setCartItems((prevItems) => {
+      // const updatedItems = prevItems.filter((item) => cartitem.id !== item.id);
+      const updatedItems = prevItems
+        .map((cartitem) =>
+          cartitem.id === cartItem.id
+            ? cartitem.quantity > 0
+              ? { ...cartitem, quantity: cartitem.quantity - 1 }
+              : cartitem
+            : cartitem
+        )
+        .filter((item) => item.quantity > 0);
+
+      return updatedItems;
+    });
+  };
   console.log(restaurant);
 
   if (isLoading || !restaurant) {
@@ -88,7 +114,12 @@ function RestaurantDetailPage() {
 
         <div>
           <Card className="my-2">
-            <OrderSummary restaurant={restaurant} cartitems={cartItems} />
+            <OrderSummary
+              restaurant={restaurant}
+              cartitems={cartItems}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+            />
           </Card>
         </div>
       </div>

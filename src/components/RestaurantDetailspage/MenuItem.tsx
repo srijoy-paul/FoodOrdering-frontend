@@ -4,6 +4,7 @@ import foodimage from "../../assets/Default_indian_culture_food_image_realistic_
 import { Button } from "../ui/button";
 import { IoAddOutline } from "react-icons/io5";
 import { CartItem } from "./RestaurantDetailPage";
+import { FaPlus } from "react-icons/fa6";
 
 type Props = {
   menuitem: MenuItemType;
@@ -34,9 +35,9 @@ function MenuItem({ menuitem, cartitems, addToCart }: Props) {
               <Button
                 onClick={addToCart}
                 variant="outline"
-                className="flex items-center hover:bg-orange-50 gap-1"
+                className="flex items-center hover:bg-orange-50 gap-1 pt-1"
               >
-                - {cartitems.quantity} +
+                {cartitems.quantity} <FaPlus size={10} />
               </Button>
             ) : (
               <Button
