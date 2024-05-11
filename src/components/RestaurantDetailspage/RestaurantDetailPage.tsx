@@ -4,9 +4,11 @@ import { AspectRatio } from "../ui/aspect-ratio";
 import RestaurantInfo from "./RestaurantInfo";
 import MenuItem from "./MenuItem";
 import { useState } from "react";
-import { Card } from "../ui/card";
+import { Card, CardFooter } from "../ui/card";
 import OrderSummary from "./OrderSummary";
 import { MenuItemType } from "@/types";
+import CheckOutButton from "./CheckOutButton";
+import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 
 export type CartItem = {
   id: string;
@@ -21,7 +23,10 @@ function RestaurantDetailPage() {
 
   const { restaurant, isLoading } = useGetRestaurant(restaurantid);
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantid}`);
+    return storedCartItems ? JSON.parse(storedCartItems) : [];
+  });
 
   const addToCart = (menuitem: MenuItemType) => {
     setCartItems((prevCartItems) => {
@@ -59,6 +64,12 @@ function RestaurantDetailPage() {
           },
         ];
       }
+
+      sessionStorage.setItem(
+        `cartItems-${restaurantid}`,
+        JSON.stringify(updatedCartItems)
+      );
+
       return updatedCartItems;
     });
   };
@@ -76,10 +87,19 @@ function RestaurantDetailPage() {
         )
         .filter((item) => item.quantity > 0);
 
+      sessionStorage.setItem(
+        `cartItems-${restaurantid}`,
+        JSON.stringify(updatedItems)
+      );
+
       return updatedItems;
     });
   };
   console.log(restaurant);
+
+  const onCheckout = (userFormData: UserFormData) => {
+    console.log("userFormData", userFormData);
+  };
 
   if (isLoading || !restaurant) {
     return <div className="container">Loading...</div>;
@@ -120,6 +140,12 @@ function RestaurantDetailPage() {
               addToCart={addToCart}
               removeFromCart={removeFromCart}
             />
+            <CardFooter>
+              <CheckOutButton
+                disabled={cartItems.length === 0}
+                onCheckout={onCheckout}
+              />
+            </CardFooter>
           </Card>
         </div>
       </div>

@@ -44,11 +44,6 @@ export const useCreateRestaurant = () => {
     console.log("enter");
 
     const accessToken = await getAccessTokenSilently();
-    // console.log(accessToken);
-
-    // restaurantFormData.forEach((value, key) => {
-    //   console.log(`create form data ${key}: Value ${value}`);
-    // });
 
     try {
       const response = await fetch(
