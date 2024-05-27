@@ -10,6 +10,7 @@ import ManageRestaurantInfoPage from "./components/ManageRestaurantPage/ManageRe
 import Layout from "./layouts/Layout";
 import SearchPage from "./components/SearchPage/SearchPage";
 import RestaurantDetailPage from "./components/RestaurantDetailspage/RestaurantDetailPage";
+import ReviewsPage from "./components/RestaurantDetailspage/ReviewsPage";
 
 const AppRoutes = () => {
   return (
@@ -34,7 +35,16 @@ const AppRoutes = () => {
             </Layout>
           }
         ></Route>
-        <Route path="reviews" element={<span>Reviews</span>}></Route>
+        <Route
+          path="reviews"
+          element={
+            <Layout isAbsolute={false}>
+              <RestaurantDetailPage>
+                <ReviewsPage />
+              </RestaurantDetailPage>
+            </Layout>
+          }
+        ></Route>
       </Route>
 
       <Route element={<ProtectedRoute />}>

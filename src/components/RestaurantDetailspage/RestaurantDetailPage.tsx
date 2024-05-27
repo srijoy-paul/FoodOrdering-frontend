@@ -1,15 +1,17 @@
 import { useGetRestaurant } from "@/Api/SearchRestaurantApi";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AspectRatio } from "../ui/aspect-ratio";
 import RestaurantInfo from "./RestaurantInfo";
 import MenuItem from "./MenuItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardFooter } from "../ui/card";
 import OrderSummary from "./OrderSummary";
 import { MenuItemType } from "@/types";
 import CheckOutButton from "./CheckOutButton";
 import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
-
+import { useCreateCheckoutSession } from "@/Api/OrderApi";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ReviewsPage from "./ReviewsPage";
 export type CartItem = {
   id: string;
   name: string;
@@ -17,11 +19,25 @@ export type CartItem = {
   quantity: number;
 };
 
-function RestaurantDetailPage() {
+function RestaurantDetailPage({ children }) {
   const { restaurantid } = useParams();
+  // const navigate = useNavigate();
+
+  const [isOnReviews, setIsOnReviews] = useState(false);
+  const url = window.location.href;
+  useEffect(() => {
+    if (
+      url === `http://localhost:5173/restaurantDetail/${restaurantid}/reviews`
+    ) {
+      console.log("URL Restaurant", url);
+      setIsOnReviews(true);
+    }
+  }, [restaurantid, url]);
+
   // console.log("From detail page", restaurantid);
 
   const { restaurant, isLoading } = useGetRestaurant(restaurantid);
+  const { createCheckoutSession } = useCreateCheckoutSession();
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantid}`);
@@ -97,7 +113,27 @@ function RestaurantDetailPage() {
   };
   console.log(restaurant);
 
-  const onCheckout = (userFormData: UserFormData) => {
+  const onCheckout = async (userFormData: UserFormData) => {
+    if (!restaurant) {
+      return;
+    }
+
+    const checkOutData = {
+      cartItems: cartItems.map((cartItem) => ({
+        menuItemId: cartItem.id,
+        name: cartItem.name,
+        quantity: cartItem.quantity.toString(),
+      })),
+      restaurantId: restaurant.restaurantid,
+      deliveryDetails: {
+        name: userFormData.name,
+        addressLine1: userFormData.addressline1,
+        city: userFormData.city,
+        country: userFormData.country,
+        email: userFormData.email as string,
+      },
+    };
+    const data = await createCheckoutSession(checkOutData);
     console.log("userFormData", userFormData);
   };
 
@@ -117,19 +153,44 @@ function RestaurantDetailPage() {
       <div className="grid md:grid-cols-[4fr_2fr] gap-5 md:px-32  pb-2">
         <div className="flex flex-col gap-4 border-3 border-green-200">
           <RestaurantInfo restaurant={restaurant} />
-          <span className="text-2xl font-bold tracking-tight">Menu</span>
-          {restaurant.menuitems.map((menuitem) => (
-            <MenuItem
-              key={menuitem.id}
-              menuitem={menuitem}
-              cartitems={
-                cartItems.length != 0
-                  ? cartItems.find((cartitem) => menuitem.id === cartitem.id)
-                  : undefined
-              }
-              addToCart={() => addToCart(menuitem)}
-            />
-          ))}
+
+          <div className="flex gap-2 w-full">
+            <Tabs
+              className=" w-full "
+              defaultValue={isOnReviews ? "Reviews" : "OrderOnline"}
+            >
+              <TabsList className="grid w-full grid-cols-2 ">
+                <TabsTrigger value="OrderOnline">Order Online</TabsTrigger>
+
+                <TabsTrigger value="Reviews">Reviews</TabsTrigger>
+              </TabsList>
+
+              <TabsContent className=" w-full space-y-5" value="OrderOnline">
+                <span className="text-2xl font-bold tracking-tight">Menu</span>
+                <span className="flex flex-col gap-3">
+                  {restaurant.menuitems.map((menuitem) => (
+                    <MenuItem
+                      key={menuitem.id}
+                      menuitem={menuitem}
+                      cartitems={
+                        cartItems.length != 0
+                          ? cartItems.find(
+                              (cartitem) => menuitem.id === cartitem.id
+                            )
+                          : undefined
+                      }
+                      addToCart={() => addToCart(menuitem)}
+                    />
+                  ))}
+                </span>
+              </TabsContent>
+              <TabsContent value="Reviews">
+                <ReviewsPage restaurantid={restaurant.restaurantid} />
+
+                {/* {children ? children : <ReviewsPage />} */}
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
 
         <div>

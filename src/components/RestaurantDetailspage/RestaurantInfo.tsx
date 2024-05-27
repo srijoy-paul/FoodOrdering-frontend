@@ -84,14 +84,6 @@ function RestaurantInfo({ restaurant }: Props) {
             Free Delivery Above ₹199
           </Badge>
         </div>
-        <div className="flex gap-2 border-b border-saffron">
-          <span className="p-3 cursor-pointer hover:bg-orange-50 border-b border-saffron">
-            <Link to="">Order Online</Link>
-          </span>
-          <span className="p-3 cursor-pointer hover:bg-orange-50">
-            <Link to="reviews">Reviews</Link>
-          </span>
-        </div>
       </CardContent>
     </Card>
   );

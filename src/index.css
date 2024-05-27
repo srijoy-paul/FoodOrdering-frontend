@@ -81,3 +81,26 @@
   box-sizing: border-box;
   /* background: rgb(252, 214, 183); */
 }
+
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+  background-color: salmon;
+}
+
+.scroll-containerbackground-color::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Hide scrollbar for Firefox */
+/* .scroll-container {
+  scrollbar-width: none;
+} */
+
+/* Hide scrollbar for Internet Explorer and Edge */
+/* .scroll-container {
+  -ms-overflow-style: none; 
+} */
