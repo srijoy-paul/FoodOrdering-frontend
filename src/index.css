@@ -84,7 +84,7 @@
 
 .scroll-container::-webkit-scrollbar {
   width: 6px;
-  background-color: salmon;
+  background-color: rgb(251 146 60);
 }
 
 .scroll-containerbackground-color::-webkit-scrollbar-thumb {
