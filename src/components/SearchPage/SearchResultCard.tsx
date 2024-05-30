@@ -40,7 +40,7 @@ function SearchResultCard({ restaurant }: Props) {
           </span>
           <span className="flex flex-row flex-wrap">
             {restaurant.cuisines.map((item, index) => (
-              <span className="flex items-center ">
+              <span key={item} className="flex items-center ">
                 <span className="text-xs">{item}</span>
                 <span>
                   {index < restaurant.cuisines.length - 1 && <Dot size={20} />}

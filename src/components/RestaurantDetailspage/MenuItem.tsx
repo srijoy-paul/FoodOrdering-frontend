@@ -14,7 +14,7 @@ type Props = {
 
 function MenuItem({ menuitem, cartitems, addToCart }: Props) {
   return (
-    <div className="flex  rounded-lg">
+    <div key={menuitem} className="flex  rounded-lg">
       <div className="w-[30%] h-[100%]">
         <img
           src={foodimage}

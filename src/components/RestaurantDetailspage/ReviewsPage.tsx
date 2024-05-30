@@ -14,6 +14,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CreateReviewForm } from "@/forms/create-review-from/CreateReviewForm";
+import { Button } from "../ui/button";
 
 type Props = {
   restaurantid: number;
@@ -23,7 +25,8 @@ export type FetchDataState = {
   sortoption: string;
 };
 function ReviewsPage({ restaurantid }: Props) {
-  const [allReviews, setAllReviews] = useState([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [allReviews, setAllReviews] = useState<any>([]);
 
   const [fetchDataState, setFetchDataState] = useState({
     page: 1,
@@ -70,15 +73,23 @@ function ReviewsPage({ restaurantid }: Props) {
     <>
       <div className="flex justify-between px-2 items-center">
         <Dialog>
-          <DialogTrigger className="gap-2 flex items-center text-white bg-saffron hover:bg-bgreen p-3 rounded-md">
-            Write Review <MdOutlineRateReview />
+          <DialogTrigger asChild>
+            {/* className="gap-2 flex items-center text-white bg-saffron hover:bg-bgreen p-3 rounded-md" */}
+            <Button className="gap-2 flex items-center text-white bg-saffron hover:bg-bgreen rounded-md">
+              Write Review <MdOutlineRateReview />
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Add a Review</DialogTitle>
               <DialogDescription>Add a Detailed Review</DialogDescription>
             </DialogHeader>
-            <div></div>
+            <div>
+              <CreateReviewForm
+                restaurantid={restaurantid}
+                setAllReviews={setAllReviews}
+              />
+            </div>
           </DialogContent>
         </Dialog>
         <SortOptionsDropdown

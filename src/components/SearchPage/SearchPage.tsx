@@ -119,7 +119,10 @@ function SearchPage() {
 
         <div className="flex flex-wrap gap-5 place-content-center">
           {results?.data.map((restaurant: Restaurant) => (
-            <SearchResultCard restaurant={restaurant} />
+            <SearchResultCard
+              key={restaurant.restaurantid}
+              restaurant={restaurant}
+            />
           ))}
 
           <PaginationSelector

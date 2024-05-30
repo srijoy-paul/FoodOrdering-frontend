@@ -49,6 +49,7 @@ function CuisineFilter({
             const isSelected = selectedCuisines.includes(cuisine);
             return (
               <div
+                key={cuisine}
                 className={`flex border border-saffron  rounded-full py-2 px-3 cursor-pointer ${
                   isSelected
                     ? "border-bgreen bg-gradient-to-r from-white via-white to-emerald-50 "

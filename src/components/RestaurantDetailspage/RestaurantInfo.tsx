@@ -43,7 +43,7 @@ function RestaurantInfo({ restaurant }: Props) {
       <CardContent className="flex flex-col">
         <div className="flex">
           {restaurant.cuisines.map((item, index) => (
-            <span className="flex text-xs flex-wrap">
+            <span key={item} className="flex text-xs flex-wrap">
               <span>{item}</span>
               {index < restaurant.cuisines.length - 1 && <Dot size={20} />}
             </span>

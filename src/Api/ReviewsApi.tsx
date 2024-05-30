@@ -1,4 +1,5 @@
 import { FetchDataState } from "@/components/RestaurantDetailspage/ReviewsPage";
+import { Review } from "@/forms/create-review-from/CreateReviewForm";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "sonner";
@@ -39,10 +40,10 @@ export const useGetReviews = (
   return { reviews, isLoading };
 };
 
-export const useCreateReviews = (review, restaurantId: number) => {
+export const useCreateReviews = (restaurantId: number) => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const createReviewsRequest = async () => {
+  const createReviewsRequest = async (review: Review) => {
     const accessToken = await getAccessTokenSilently();
     const response = await fetch(
       `${API_BASE_URL}/api/v1/reviews/${restaurantId}/createReview`,
